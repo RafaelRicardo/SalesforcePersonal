@@ -1,0 +1,95 @@
+<apex:page showHeader="false" sidebar="false" language="es" docType="html-5.0" standardStylesheets="false">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <head>
+            <title>AngularJS - Lightning Design System</title>
+            <apex:stylesheet value="{!URLFOR($Resource.SLDS0110, 'styles/salesforce-lightning-design-system.css')}" />            
+            <script src="{!$Resource.AngularJS}"/>
+       </head>
+            
+            <body ng-app="formLabs" id="idMostrarFormulario">
+                <div ng-controller="UserController"> 
+                    <form name="userForm">
+                        <label for="name">Nombre</label> <br/>
+                        <input name="name" type="text" ng-model="user.name" ng-model-options="{updateOn: 'blur'}" required="true"/>
+                        <span class="messages" ng-show="userForm.$submitted || userForm.name.$touched">
+                        <span ng-show="userForm.name.$error.required">El campo es obligatorio.</span>
+                        </span>
+
+                            <br/>
+                        <label for="email">Email</label><br/>
+                        <input name="email" type="email" ng-model="user.email" ng-model-options="{updateOn: 'blur'}" required="true"/>
+                        <span class="messages" ng-show="userForm.$submitted || userForm.email.$touched">
+                        <span ng-show="userForm.email.$error.required">El campo es obligatorio.</span>
+                        <span ng-show="userForm.email.$error.email">Formato de email incorrecto.</span>
+                        </span>
+                            <br/>
+                        <label for="gender">Genero</label><br/>
+                        <input name="gender" type="radio" ng-model="user.gender" value="male"/>Masculino
+                        <input name="gender" type="radio" ng-model="user.gender" value="female"/>Femenino
+                            <br/>
+                        <label for="age">Edad</label><br/>
+                        <input name="age" type="number" ng-model="user.age" ng-model-options="{updateOn: 'blur'}" min="0" max="150"/>
+                        <span class="messages" ng-show="userForm.$submitted || userForm.age.$touched">
+        				<span ng-show="userForm.age.$error.max">La edad no puede exceder de 150.</span>
+      					</span>
+                            <br/><br/>
+                        <input type="button" ng-click="reset()" value="Limpiar"/>
+                        <input type="button" ng-click="update()" value="Guardar" ng-disabled="userForm.$invalid"/>
+                     </form>
+                     <pre>user = {{ user | json }}</pre>
+<br/>                            
+<label>
+<input type="checkbox" ng-model="checked" />
+Is visible
+</label>
+<div class="content-area sample-show-hide" ng-show="checked">
+Content...                     
+</div>
+                  </div>                  
+             </body>  
+            <script>
+                            
+               var miApp = angular.module('formLabs',[]);               
+               miApp.controller('UserController',function($scope){
+                $scope.idMostrarFormulario = false;
+               	$scope.user = {};
+                   
+                $scope.update = function(){
+                console.log($scope.user);
+                };
+                   
+                $scope.reset= function(form){
+                $scope.user = {};	
+                    if(form){
+                    	form.$setPristine();
+                    	form.$setUntouched();
+                        }
+                };
+                   
+                $scope.reset();   
+               }); 
+            </script>
+            
+ 
+<style type="text/css">
+ 
+  .messages {
+    color: #FA787E;
+  }
+  
+  form.ng-submitted input.ng-invalid{
+    border-color: #FA787E;
+  }
+  
+  form input.ng-invalid.ng-touched {
+    border-color: #FA787E;
+  }
+  
+
+  form input.ng-valid.ng-touched {
+    border-color: #78FA89;
+  }
+  
+</style>
+        </html>
+    </apex:page>

@@ -1,0 +1,22 @@
+<apex:page >
+    
+    <apex:pageBlock >
+        <apex:pageBlockSection >
+            <p>
+                Nombre: {! $User.FirstName}
+            </p>
+            
+            <p>
+                Apellido: {! $User.LastName}
+            </p>
+            
+            <p>
+                Usuario: {! $User.Username}
+            </p>
+            
+            <p>
+                Esta Activo: {! $User.isActive}
+            </p>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,9 @@
+<apex:page controller="selectOptionClass">
+    <apex:form id="formulario">
+        <apex:selectList value="{!countries}"  multiselect="false" size="1">
+            <apex:selectOptions value="{!items}"/>
+            <apex:actionSupport event="onchange" action="{!asigna}" reRender="formulario" />
+        </apex:selectList><p/>
+        <p>You have selected: {!countries} </p>
+    </apex:form>
+</apex:page>

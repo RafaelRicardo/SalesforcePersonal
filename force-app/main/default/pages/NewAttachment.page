@@ -1,0 +1,19 @@
+<apex:page controller="NewAttachmentClass" showHeader="false">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Subject">
+                <apex:inputText value="{!subject}" />
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="Attachment">
+                <apex:inputFile value="{!filebody}" fileName="{!filename}" />
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="Description">
+                <apex:inputTextarea value="{!description}" rows="8" cols="80" />
+            </apex:pageBlockSection>
+
+            <apex:commandButton value="Submit" action="{!doSubmit}" />
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

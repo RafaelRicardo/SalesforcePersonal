@@ -1,0 +1,79 @@
+<apex:page showHeader="false" sidebar="false" language="es" docType="html-5.0" standardStylesheets="false">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        
+        <head>
+            <title>AngularJS - Lightning Design System</title>            
+            <apex:stylesheet value="{!URLFOR($Resource.SLDS0110, 'styles/salesforce-lightning-design-system.css')}" />            
+            <script src="{!$Resource.AngularJS}"/>
+           
+        </head>
+        <body>
+            <div  ng-app="MyApp"> 
+                <div ng-controller="myController">                
+                    <h3> archivo de totalidad:: {{getTotalidad()}} </h3>                
+                    <ul class="unstyled">
+                        <li ng-repeat="lst in lista">                        
+                            <input type="checkbox" ng-model="lst.done"/>
+                            <scan class="done-{{lst.done}}">{{lst.text}} '-' {{lst.done}}</scan>                       
+                        </li>
+                    </ul>
+                    <form class="form-horizontal">
+                        <input type="text" ng-model="formTodoText" ng-model-instant=""/>
+                        <button class="btn" ng-click="addLista()"><i class="icon-plus"></i>Add</button>
+                    </form>
+                    <button class="btn-large" ng-click="clearCompleted()">
+                        <i class="icon-trash"></i>Clear completed</button>
+                </div>
+            </div>                  
+        </body>
+            
+        
+        <script type="text/javascript">
+            var MyApp = angular.module('MyApp', []);
+            MyApp.controller('myController', function ($scope) {
+                
+            myController($scope);
+                
+                
+                function myController($scope){	
+                    
+                    $scope.lista = [
+                        {text:'Learn Angularjs', done:false},
+                        {text:'LBuild and app', done:false}
+                    ];
+                    
+                    
+                    $scope.getTotalidad = function (){
+                        return $scope.lista.length;
+                    };
+                    
+                    $scope.clearCompleted = function () {
+                        
+                        var oldLista = $scope.lista;
+                        $scope.lista = [];
+                        angular.forEach(oldLista, function(ctr){
+                            console.log('valor dentro2 ' + ctr);
+                            if(!ctr.done) $scope.lista.push(ctr);
+                        });
+                    };
+                    
+                    
+                    $scope.addLista = function (){		
+                        if($scope.formTodoText != false){
+                            $scope.lista.push({text:$scope.formTodoText,done:false})
+                            $scope.formTodoText = '';
+                        }
+                    };
+                }
+            });
+        
+        </script>
+        
+        <style>
+        .done-true{
+            text-decoration: line-through;
+            color: blue;
+            }
+        </style>
+    </html>
+</apex:page>

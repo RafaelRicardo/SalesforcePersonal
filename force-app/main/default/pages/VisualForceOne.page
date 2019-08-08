@@ -1,0 +1,12 @@
+<apex:page controller="ControladorVisualforceOne">
+  <!-- Begin Default Content REMOVE THIS -->
+  <h1>Practica donde probaremos onClick</h1>
+  
+  <apex:form >
+  <apex:commandButton value="Enviar" action="{!metodo}"/>
+  <input type="button" value="Imprime" name="btn"
+         onClick="window.location='VisualForceTwo'"/>
+  </apex:form>
+  
+  
+</apex:page>

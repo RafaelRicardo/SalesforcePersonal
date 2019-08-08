@@ -1,0 +1,19 @@
+<apex:page controller="OppsController">
+    
+    <apex:form >
+    	<apex:dataTable value="{!OpportunitiesWithIndex}" var="wrapped" columns="3" cellspacing="6">
+            <apex:column >
+                <apex:facet name="header">Oportunidad</apex:facet>
+                <apex:outputField value="{!wrapped.opp.amount}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header"> Nombre Opp</apex:facet>
+                <apex:outputField value="{!wrapped.opp.Name}"/>                
+            </apex:column>
+            <apex:column >
+            	<apex:facet name="header">Indice</apex:facet>
+                <apex:outputText value="{!wrapped.tabIndex}"/>
+            </apex:column>            
+        </apex:dataTable>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,18 @@
+<apex:page standardController="Contact">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <apex:slds />
+        <span class="slds-icon_container slds-icon-standard-account">
+            <svg aria-hidden="true" class="slds-icon">
+                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#account')}"></use>
+            </svg>
+             <span class="slds-assistive-text">Account Icon</span>
+        </span>
+    </html>
+    <apex:form >
+        <apex:inputField value="{!Contact.FirstName}"/>
+        <apex:inputField value="{!Contact.LastName}"/>
+        <apex:inputField value="{!Contact.Email}"/>
+        
+        <apex:commandButton action="{! save }" value=" Save "/>
+    </apex:form>
+</apex:page>

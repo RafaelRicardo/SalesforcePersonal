@@ -1,0 +1,80 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false"
+           docType="html-5.0" controller="CapturaProductoControlador">
+    <html ng-app="demoApp" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <head>
+            <title>Captura de producto</title>
+           <script src="{!$Resource.AngularJS}"/>
+            
+        <script>
+            // define la app
+           var demoApp = angular.module('demoApp', []);
+           // agrega el controlador
+           demoApp.controller('DemoCtrl', function($scope){
+           	$scope.pricebook2 = {!pricebook2}
+            console.log('lista de preciaos: '+ $scope.pricebook2);
+            $scope.myFuncion = function (item){
+               Visualforce.remoting.Manager.invokeAction(
+               	'{!$RemoteAction.CapturaProductoControlador.getProduct2}',item,
+                   function (result,event){
+                   		if(event.status){
+                            if(result.length > 0){
+                                $scope.productos = result;
+                                $scope.msg = '';
+                            }else{
+                                $scope.productos = '';
+                                $scope.msg = 'Productos no encontrados';
+                            }
+                        }
+                   },
+                   {escape : false}
+               );}
+           });
+        
+        </script>
+        </head>
+        
+        <body class="container" ng-controller="DemoCtrl">
+            <!-- REQUIRED SLDS WRAPPER -->
+            <div class="slds">                
+                <!-- PAGE HEADER -->
+                <div class="slds-page-header" role="banner">
+                    <p class="slds-text-heading--label">Selecciona la lista de precios</p>
+                    <select ng-model="selectedTestPriceBook2" ng-change="myFuncion(selectedTestPriceBook2)">
+                        <option ng-repeat="item in pricebook2" value="{{item.Id}}">
+                            {{item.name}}
+                        </option>
+                    </select>                    
+                </div>
+                <br/><br/>
+                
+                <p class="slds-text-heading--label">Lista de productos</p>
+                <div ng-show="selectedTestPricebook2">
+                    <b>Search</b>&nbsp;&nbsp;&nbsp;<input ng-model="query" />
+                </div>
+                
+                
+                <!-- / PAGE HEADER -->
+                <!-- PRIMARY CONTENT WRAPPER -->
+                <table class="slds-table slds-table--bordered" id="table" ng-show="selectedTestPricebook2">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre Productos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="producto in productos | filter:query">
+                            <td>{{producto.id}}</td>
+                            <td>{{producto.name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- / PRIMARY CONTENT WRAPPER -->
+            </div>
+            <!-- / REQUIRED SLDS WRAPPER -->
+        </body>
+        <!-- JAVASCRIPT -->
+        
+        <!-- / JAVASCRIPT -->
+    </html>
+</apex:page>

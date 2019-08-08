@@ -1,0 +1,55 @@
+<apex:page controller="StoreFrontController" tabStyle="Merchandise__c">
+    <apex:form >
+    <style>
+        .activeTab {background-color: #236FBD; color:white; background-image:none}
+        .inactiveTab { background-color: lightgrey; color:black; background-image:none}
+    </style>
+    <apex:pageBlock title="Our Products"> 
+        
+        <apex:pageBlockSection >
+            
+            <apex:pageBlockTable value="{!products}" var="pitem">
+                
+                <apex:column headerValue="Nombre Merchandise">
+                    <apex:outputText value="{!pitem.id}" />
+                </apex:column>
+                
+                <apex:column headerValue="Nombre Merchandise">
+                    <apex:outputText value="{!pitem.Name}" />
+                </apex:column>
+                
+                <apex:column headerValue="Descripcion Merchandise">
+                    <apex:outputText value="{!pitem.Description}" />
+                </apex:column>
+                
+                <apex:column headerValue="Precio Merchandise" style="text-align: right;">
+                    <apex:outputText value="{!pitem.Price}" />
+                </apex:column>
+                
+                <apex:column headerValue="Currency Merchandise" style="text-align: right;">
+                    <apex:outputText value="{0,number,currency}">
+                        <apex:param value="{!pitem.Price}"/>
+                    </apex:outputText>
+                </apex:column>
+            
+               <apex:column headerValue="Qty to by">
+                   <apex:inputText value="{!pitem.qtyToBuy}" rendered="{! pitem.inStock}"/>
+                   <apex:outputText value="Out of Stock" rendered="{!NOT(pitem.inStock)}"/>
+                </apex:column>
+            
+            </apex:pageBlockTable>
+            
+        </apex:pageBlockSection> 
+        
+       <apex:pageBlockSection >
+            <apex:commandButton action="{!addToCart}" value="Add to Cart" reRender="shopping_cart"/>
+        </apex:pageBlockSection>   
+        
+    </apex:pageBlock>
+    
+    <apex:pageBlock title="Your Cart" id="shopping_cart">
+         <apex:outputText value="{!cartContents}" escape="false"/>
+    </apex:pageBlock>
+    <apex:detail />
+    </apex:form>
+</apex:page>

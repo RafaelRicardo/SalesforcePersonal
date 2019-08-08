@@ -1,0 +1,40 @@
+<apex:page >
+    
+    <apex:remoteObjects >
+    	<apex:remoteObjectModel name="Campsite__c" jsShorthand="Campsite" fields="Name,Id">
+            <apex:remoteObjectField name="Description__c" jsShorthand="Description"></apex:remoteObjectField>
+        </apex:remoteObjectModel>
+    </apex:remoteObjects>
+    
+    <script>
+	var fetchWareHouse = function(){
+		var wh = new SObjectModel.Campsite();
+		wh.retrieve( 
+			{limit: 10}, function(err, records, event){
+				if(err){
+					alert(err.message);
+				}else{
+				var ul = document.getElementById("warehousesList");
+				records.forEach(function(record){
+					var whText = record.get("Name");
+					whText += "--";
+					whText += record.get("Phone");
+					var li = document.createElement("li");
+					li.appendChild(document.createTextNode(whText));
+					ul.appendChild(li);
+				});
+				}
+			}
+		);									
+	};
+    </script>
+    
+    <h1>Retrieve Warehouses via Remote Objects</h1>
+    <p>Warehouses:</p>
+	<ul id="warehousesList"></ul>
+    <div id="pageButtons">
+    <button id="ides" onclick="fetchWareHouse()">Retrieve Warehouses</button>
+    </div>
+
+    
+</apex:page>

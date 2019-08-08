@@ -1,0 +1,45 @@
+// Schema.DescribeFieldResult dfr = Schema.SObjectType.Account.fields.Name;
+//System.debug('Schema.SObjectType.Account.fields.Name: '+ dfr);
+
+// Schema.DescribeSObjectResult d = Account.sObjectType.getDescribe();
+// Map<String, Schema.FieldSet> FsMap = d.fieldSets.getMap();
+// System.debug('Account.sObjectType.getDescribe: '+ d);
+// System.debug('---------------');
+// System.debug('d.fieldSets.getMap: '+ FsMap);
+
+// Schema.DescribeSObjectResult R = Account.SObjectType.getDescribe();
+// List<Schema.ChildRelationship> C = R.getChildRelationships();
+// System.debug('Account.sObjectType.getDescribe: '+ R);
+// System.debug('---------------');
+// System.debug('R.getChildRelationships: '+ C);
+
+// Schema.DescribeSObjectResult pref = Account.SObjectType.getDescribe();
+// System.debug('getKeyPrefix: '+ pref.getKeyPrefix());
+
+// Schema.DescribeSObjectResult lab = Account.SObjectType.getDescribe();
+// System.debug('getLabel: '+ lab.getLabel());
+
+// Schema.DescribeSObjectResult loc = Account.SObjectType.getDescribe();
+// System.debug('getLocalName: '+ loc.getLocalName());
+
+// Schema.DescribeSObjectResult info = Account.SObjectType.getDescribe();
+//  System.debug('getRecordTypeInfos: '+ (info.getRecordTypeInfos())[0].getDeveloperName());  // RETORNA LISTA
+
+// Schema.DescribeSObjectResult byName = Account.SObjectType.getDescribe();
+// System.debug('getRecordTypeInfos: '+ byName.getRecordTypeInfosByDeveloperName());  // RETORNA MAP
+
+// Schema.DescribeSObjectResult byName = Account.SObjectType.getDescribe();
+// System.debug('getRecordTypeInfosById: '+ byName.getRecordTypeInfosById());  // RETORNA MAP DE IDs
+
+// Schema.DescribeSObjectResult byName = Account.SObjectType.getDescribe();
+// System.debug('getRecordTypeInfosById: '+ byName.getRecordTypeInfosByName());  // RETORNA MAP DE IDs
+
+// Schema.DescribeSObjectResult sObj = Account.SObjectType.getDescribe();
+// System.debug('getRecordTypeInfosById: '+ sObj.getSobjectType());  // RETORNA MAP DE IDs
+
+//  Schema.DescribeSObjectResult sObj = Account.SObjectType.getDescribe();
+//  System.debug('isAccessible: '+ sObj.isAccessible());  // RETORNA MAP DE IDs
+
+// System.debug('contact '+Contact.SObjectType.Contact.fields.Email);
+// System.debug('email '+Schema.sObjectType.Contact.fields.Email.isUpdateable());
+// System.debug('deleted object '+Schema.sObjectType.Contact.isDeletable());

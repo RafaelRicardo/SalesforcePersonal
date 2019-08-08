@@ -1,0 +1,50 @@
+<apex:page standardController="Project__c">
+    <apex:includeScript value="/soap/ajax/38.0/connection.js"/>
+    
+    <script type="text/javaScript">
+    
+    function procesoFinanciacion(){
+        if({!Project__c.Financiacion__c}){ 
+            alert("Este proyecto aplica financiacion"); 
+            
+        }else{ 
+            var elProjecto = new sforce.SObject('Project__c'); 
+            alert('entro '+ elProjecto);
+            elProjecto.Id = '{!Project__c.Id}'; 
+            elProjecto.Financiacion__c = true; 
+            sforce.connection.sessionId = '{!GETSESSIONID()}';
+            var resultado = sforce.connection.update([elProjecto]); 
+            
+            if(!resultado[0].getBoolean('success')){ 
+                alert("No se puede actualizar"); 
+            } 
+            else{ 
+                window.location.reload(); 
+            }
+        }
+    }
+
+    </script>
+    
+    <apex:sectionHeader title="Projecto nuevo" subtitle="{!Project__c.Name + ' ' + Project__c.Priority__c}"/>
+    <apex:form id="idMainForm">
+        <apex:pageBlock id="idMainBlock" mode="MainDetail" title="Projecto detalle">
+            <apex:pageBlockButtons location="top">
+            <apex:commandButton value="Guardar" action="{!save}"/>
+                <apex:commandButton value="Aplica para financiacion" onclick="procesoFinanciacion()" reRender="null"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection id="idProjectInfo" columns="2" title="test" collapsible="false" showHeader="false">
+            	<apex:inputField id="idName" value="{!Project__c.Name}"/>
+                <apex:inputField id="idPrioridad" value="{!Project__c.Priority__c}"/>
+                <apex:inputCheckbox id="idInputFinanciacion" value="{!Project__c.Financiacion__c}"/>
+                <apex:pageBlockSectionItem >
+                    <apex:outputText value="Nombre de projecto" />
+                    <apex:outputText id="idPrioridadText" value="{!IF(Project__c.Financiacion__c,'Aplica','No aplica')}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock>
+        
+        
+    </apex:form>
+</apex:page>

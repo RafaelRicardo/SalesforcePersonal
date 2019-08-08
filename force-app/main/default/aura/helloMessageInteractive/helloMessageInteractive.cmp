@@ -1,0 +1,24 @@
+<aura:component>
+ 
+    <aura:attribute name="message" type="String"/>
+    <aura:attribute name="item" type="boolean"/>
+ 
+    <p>Message of the day: {!v.message}</p>
+    <p>Mensaje de atributo: {!v.item}</p>
+ 
+    <div>
+        <lightning:button label="You look nice today."
+            onclick="{!c.handleClick}"/>
+ 
+        <lightning:button label="Today is going to be a great day!"
+            onclick="{!c.handleClick2}"/>
+        
+        <lightning:button label="Consola de error!"
+            onclick="{!c.handleClick3}"/>
+        
+        <lightning:button label="Packed!"
+                          disabled="{!v.item}"
+            onclick="{!c.packItem}"/>
+    </div>
+ 
+</aura:component>

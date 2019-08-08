@@ -1,0 +1,28 @@
+public class ServicioAngularHTTP {
+	
+    public String dato {get;set;}
+    
+    public static String getdatos(){
+        String dato = '{ "nif":"12345678Z",'+    
+                '"nombre":"Carlos",'+
+                '"ape1":"Cano",'+
+                '"edad":41,'+
+                '"sexo":"H",'+
+                '"casado":true,'+
+                '"numHijos":3,'+
+                '"embarazada":false,'+
+                '"coberturas": {'+
+                    '"oftalmologia":true,'+
+                    '"dental":false,'+
+                    '"fecundacionInVitro":false }, '+
+               '"enfermedades":{'+
+                    '"corazon":true,'+
+                    '"estomacal":false,'+
+                    '"rinyones":false,'+
+                    '"alergia":true,'+
+                    '"nombreAlergia":"Acaros" }'+
+             '}';
+                
+		return JSON.Serialize(dato);
+	}
+}

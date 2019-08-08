@@ -1,0 +1,31 @@
+<apex:page controller="Checkbox_class2">
+    
+    <apex:form >
+        <apex:pageBlock >
+            
+            <apex:pageBlockTable value="{!accounts}" var="a" id="Selected_PBS">
+                <apex:column >
+                    <apex:facet name="header">
+                            <apex:inputCheckbox value="{!a.selected}" id="checkedone">
+                                <apex:actionSupport event="onclick" action="{!GetSelected}" rerender="Selected_PBS"/>
+                            </apex:inputCheckbox>
+                    </apex:facet>
+                </apex:column>
+                <apex:column ><apex:facet name="header">Id</apex:facet><apex:outputfield value="{!a.acc.id}"/></apex:column>
+                <apex:column ><apex:facet name="header">Name</apex:facet><apex:outputfield value="{!a.acc.name}"/></apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+    <script type="text/javascript">
+    function checkAll(cb,cbid)
+    {
+        var inputElem = document.getElementsByTagName("input");                     
+        for(var i=0; i<inputElem.length; i++)
+        {             
+            if(inputElem[i].id.indexOf(cbid)!=-1){                                        
+                inputElem[i].checked = cb.checked;
+            }
+        }
+    }
+</script>
+</apex:page>

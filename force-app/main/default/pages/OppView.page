@@ -1,0 +1,8 @@
+<apex:page standardController="Opportunity">
+    
+    <apex:outputField label="Nombre de la oportunidad" value="{!Opportunity.Name}"/> <br/>
+    <apex:outputField label="Cantidad en la oportunidad" value="{!Opportunity.Amount}"/> <br/>
+    <apex:outputField label="Nombre de la oportunidad" value="{!Opportunity.CloseDate}"/> <br/>
+    <apex:outputField label="Nombre de la oportunidad" value="{!Opportunity.Account.name}"/>
+    
+</apex:page>

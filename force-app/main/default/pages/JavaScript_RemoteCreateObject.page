@@ -1,0 +1,75 @@
+<apex:page >
+    
+    <apex:remoteObjects >
+        <apex:remoteObjectModel name="Book__c" jsShorthand="Book" fields="Name,Id,OwnerId">
+            <apex:remoteObjectField name="Price__c" jsShorthand="Price"></apex:remoteObjectField>
+        </apex:remoteObjectModel>
+    </apex:remoteObjects>
+    
+    <script>
+    alert("Ingrese precio");
+    var precio = prompt();
+    alert("Ingrese nombre");
+    var nombre = prompt();
+    
+    var ejecuta = function(){
+    	var objCreado = {Name: nombre, Price__c: precio};
+    	var instancia = new SObjectModel.Book();
+    	console.log("log01");
+    	instancia.create(objCreado, function(err){
+        								if(err){
+                                            console.log("log1");
+                                        	alert(err.message);
+                                        }else{
+                                        	console.log(instancia.log());
+                                            console.log(instancia.get("Id"));
+											resultado();                                            
+                                        }
+        							}        	
+                        );
+        };
+    
+    var resultado = function(){
+    	var ac = new SObjectModel.Book();
+        var QueryParam = {orderby: [{Name: 'ASC'}], limit: 15};
+        
+        ac.retrieve(QueryParam, function(err, records, event){
+            							        if(err){
+                                                    alert(err.message);
+                                                }else{
+                                                    var tableBody = document.getElementById("BookTableBody");
+                                                    tableBody.innerHTML	= "";
+                                                    records.forEach(function(record){
+                                                                        var row = tableBody.insertRow();
+                                                                        var cell0 = row.insertCell(0);
+                                                                        var cell1 = row.insertCell(1);
+                                                                        var cell2 = row.insertCell(2);
+                                                                        cell0.innerHTML = record.get("Name");
+                                                                        cell1.innerHTML = record.get("Price__c");
+                                                                        cell2.innerHTML = record.get("OwnerId");
+                                                    						}
+                                                                     );
+        								    }
+        						}
+                   );
+    }
+    </script>
+    
+    <h1>Create object Book</h1>
+    <p>Book:</p>
+    <div id="pageButtons">
+    <button id="ides" onclick="ejecuta()">Create Book</button>
+    </div>
+    
+    <table id="BookTable">
+        <thead>
+            <tr>
+                <td>{!$ObjectType.Book__c.Fields.Name.Label}</td>
+                <td>{!$ObjectType.Book__c.Fields.Price__c.Label}</td>
+                <td>{!$ObjectType.Book__c.Fields.OwnerId.Label}</td>
+            </tr>
+        </thead>
+        <tbody id="BookTableBody">
+        </tbody>
+    </table>
+</apex:page>
