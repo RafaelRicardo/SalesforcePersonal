@@ -1,1 +1,2 @@
 List<Contact> lstContactos = [SELECT id, name, email FROM Contact];
+List<Account> lstCuentas = [SELECT id FROM Account LIMIT 1];
