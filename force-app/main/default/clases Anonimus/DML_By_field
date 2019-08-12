@@ -1,3 +1,4 @@
 List<Contact> lstContactos = [SELECT id, name, email FROM Contact];
 List<Account> lstCuentas = [SELECT id FROM Account LIMIT 1];
 List<Opportunity> lstOportunidad = [SELECT id from Opportunity LIMIT 1];
+List<Lead> lstLead = [SELECT id from Lead LIMIT 1];
